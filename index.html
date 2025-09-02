@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MythBusters for Kids - 100+ Myths!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Fredoka+One&display=swap');
+    
+    :root {
+      --primary: #FF9E1B;
+      --secondary: #6DCFF6;
+      --accent: #FF4F79;
+      --light: #FFF8E1;
+      --dark: #2C3E50;
+      --confirmed: #4CAF50;
+      --busted: #FF4F79;
+      --plausible: #FFC107;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Comic Neue', cursive;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #F9F5FF 0%, #E1F5FE 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .logo i {
+      color: white;
+      animation: bounce 2s infinite;
+    }
+    
+    /* Navigation */
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      transition: all 0.3s;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    nav a:hover, nav a.active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 0;
+      background: url('https://images.unsplash.com/photo-1516780236580-ef416334d5b4?q=80&w=698&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+      color: white;
+      margin-bottom: 2rem;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(108, 207, 246, 0.8), rgba(255, 158, 27, 0.8));
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Fredoka One', cursive;
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .search-bar {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      animation: zoomIn 1s ease;
+    }
+    
+    .search-bar input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 30px 0 0 30px;
+      font-size: 1.1rem;
+      font-family: 'Comic Neue', cursive;
+    }
+    
+    .search-bar button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+    
+    .search-bar button:hover {
+      background: #FF2A5D;
+      transform: scale(1.05);
+    }
+    
+    .characters {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      animation: bounceIn 1.5s ease;
+    }
+    
+    .character {
+      background: white;
+      border-radius: 20px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+    
+    .character:hover {
+      transform: translateY(-10px) rotate(3deg);
+    }
+    
+    .character img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Main Content */
+    .main-content {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    
+    .main-content.active {
+      display: block;
+    }
+    
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      margin: 2rem 0;
+      color: var(--dark);
+      position: relative;
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 6px;
+      background: var(--secondary);
+      margin: 0.5rem auto;
+      border-radius: 3px;
+    }
+    
+    /* Myth List */
+    .myth-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .myth-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      border: 3px solid var(--primary);
+      position: relative;
+    }
+    
+    .myth-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .myth-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .myth-card-content {
+      padding: 1.5rem;
+    }
+    
+    .verdict-pill {
+      padding: 0.5em 1.2em;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .verdict-busted {
+      background: var(--busted);
+      color: white;
+    }
+    
+    .verdict-confirmed {
+      background: var(--confirmed);
+      color: white;
+    }
+    
+    .verdict-plausible {
+      background: var(--plausible);
+      color: white;
+    }
+    
+    .myth-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .myth-card p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .read-more {
+      display: inline-block;
+      padding: 0.8em 1.5em;
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .read-more:hover {
+      background: #4BB5E3;
+      transform: scale(1.1);
+    }
+    
+    /* Myth Detail */
+    .myth-detail {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border: 3px solid var(--secondary);
+    }
+    
+    .myth-detail img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8em 1.5em;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .back-button:hover {
+      background: #FF8A00;
+      transform: scale(1.1);
+    }
+    
+    /* About Page */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border: 3px solid var(--accent);
+    }
+    
+    .about-content h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .about-content p {
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    /* Floating animation for decorative elements */
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav ul {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .myth-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .characters {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .search-bar {
+        flex-direction: column;
+      }
+      
+      .search-bar input {
+        border-radius: 30px;
+        margin-bottom: 0.5rem;
+      }
+      
+      .search-bar button {
+        border-radius: 30px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-dragon"></i>
+          <span>MythBusters for Kids</span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-target="browse">Myths</a></li>
+            <li><a href="#" class="nav-link" data-target="about">About</a></li>
+            <li><a href="#" class="nav-link" data-target="games">Games</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>MythBusters for Kids!</h1>
+        <p>Discover the truth behind 100+ amazing myths and legends!</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for fun myths..." id="searchInput">
+          <button id="searchButton"><i class="fas fa-search"></i> Explore</button>
+        </div>
+        <div class="characters">
+          <div class="character float">
+            <img src="https://images.unsplash.com/photo-1549359649-0684c60d220b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fairytale">
+            <p>Wise Owl</p>
+          </div>
+          <div class="character float" style="animation-delay: 0.5s;">
+            <img src="https://cdn-icons-png.flaticon.com/512/4330/4330880.png" alt="Gaming">
+            <p>Curious Fox</p>
+          </div>
+          <div class="character float" style="animation-delay: 1s;">
+            <img src="https://cdn.pixabay.com/photo/2022/08/23/11/57/rabbit-7405618_1280.png" alt="Detective">
+            <p>Brave Lion</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Home Page -->
+    <section id="home" class="main-content active">
+      <h2 class="section-title">Today's Fun Myths</h2>
+      <div class="myth-list" id="featuredMythList"></div>
+    </section>
+
+    <!-- Browse Page -->
+    <section id="browse" class="main-content">
+      <h2 class="section-title">Myth Adventure Stories</h2>
+      <div class="myth-list" id="browseMythList"></div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="main-content">
+      <div class="about-content">
+        <h2>About MythBusters for Kids</h2>
+        <p>Welcome to MythBusters for Kids, where we explore over 100 amazing myths and legends from around the world in a fun and exciting way!</p>
+        <p>Join our team of curious animal friends as we investigate whether sharks can really smell a drop of blood from miles away, if you can turn invisible by wearing a special cloak, and whether dragons might have actually existed!</p>
+        <p>Each myth is turned into a fun adventure story where we search for clues, conduct experiments, and discover the truth together!</p>
+        <h3>Our Myth Rating System</h3>
+        <p><span class="verdict-pill verdict-confirmed">TRUE</span> - The myth is supported by evidence</p>
+        <p><span class="verdict-pill verdict-busted">BUSTED</span> - The myth is not supported by evidence</p>
+        <p><span class="verdict-pill verdict-plausible">MAYBE</span> - The myth could be true under specific circumstances</p>
+      </div>
+    </section>
+
+    <!-- Games Page -->
+    <section id="games" class="main-content">
+      <div class="about-content">
+        <h2>MythBuster Games</h2>
+        <p>Coming soon! Exciting games where you can become a MythBuster yourself!</p>
+        <div style="text-align: center; margin: 2rem 0;">
+          <img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Game Controller" style="width: 100px; height: 100px;">
+        </div>
+        <p>We're working on fun games where you can:</p>
+        <ul style="list-style-type: none; margin-left: 1.5rem;">
+          <li>🔍 Solve myth mysteries</li>
+          <li>🧪 Conduct virtual experiments</li>
+          <li>📚 Create your own myth stories</li>
+        </ul>
+        <p style="text-align: center; margin-top: 2rem; font-weight: bold;">Check back soon for these exciting adventures!</p>
+      </div>
+    </section>
+
+    <!-- Myth Detail View (initially hidden) -->
+    <section id="myth-detail" class="main-content"></section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; MythBusters for Kids. All rights reserved.</p>
+      <p>Made with ❤️ for curious young minds!</p>
+    </div>
+  </footer>
+
+  <script>
+    // Myth database with over 100 myths
+    const mythDatabase = {
+      categories: ["Animals", "Science", "Food", "History", "Nature", "Space", "Human Body", "Weather"],
+      verdicts: ["BUSTED", "CONFIRMED", "PLAUSIBLE"],
+      mythTemplates: [
+        { title: "Does {0} really cause {1}?", claim: "Many people believe that {0} causes {1}." },
+        { title: "The truth about {0} and {1}", claim: "There's a widespread belief that {0} is connected to {1}." },
+        { title: "Debunking the {0} myth", claim: "One common myth suggests that {0} has extraordinary properties." },
+        { title: "Is {0} actually good for {1}?", claim: "Some claim that {0} has benefits for {1}." },
+        { title: "The {0} conspiracy theory", claim: "A popular conspiracy theory suggests that {0} is being hidden from the public." }
+      ],
+      subjects: [
+        ["vitamin C", "colds"], ["chocolate", "acne"], ["reading in dim light", "eye damage"], 
+        ["cracking joints", "arthritis"], ["swimming after eating", "cramps"], ["sugar", "hyperactivity"],
+        ["MSG", "headaches"], ["hair dye", "cancer"], ["cell phones", "brain tumors"],
+        ["microwaves", "nutrition loss"], ["deodorant", "breast cancer"], ["flu shots", "the flu"],
+        ["vaccines", "autism"], ["GMOs", "health issues"], ["organic food", "higher nutrition"],
+        ["sharks", "blood detection"], ["bats", "blindness"], ["ostriches", "hiding their heads"],
+        ["goldfish", "3-second memory"], ["chameleons", "changing color to match surroundings"],
+        ["dogs", "seeing in black and white"], ["bulls", "charging at red color"], ["cats", "having nine lives"],
+        ["ducks", "quacks not echoing"], ["elephants", "fear of mice"], ["lemmings", "mass suicide"],
+        ["mother birds", "rejecting babies touched by humans"], ["opossums", "hanging by their tails"],
+        ["porcupines", "shooting their quills"], ["turkeys", "drowning in rain"],
+        ["the Great Wall of China", "visibility from space"], ["Napoleon", "being short"],
+        ["Einstein", "failing math"], ["Columbus", "discovering the Earth was round"],
+        [" Vikings", "wearing horned helmets"], ["ancient Romans", "vomiting during feasts"],
+        ["the Middle Ages", "people thinking the Earth was flat"], ["Benjamin Franklin", "discovering electricity"],
+        ["Thomas Edison", "inventing the light bulb"], ["Isaac Newton", "discovering gravity from an apple"],
+        ["the moon landing", "being faked"], ["Area 51", "hiding aliens"],
+        ["Bermuda Triangle", "disappearing ships and planes"], ["Loch Ness", "having a monster"],
+        ["the lost city of Atlantis", "existing"], ["Bigfoot", "roaming forests"],
+        ["the Abominable Snowman", "living in the Himalayas"], ["zombies", "being real"],
+        ["vampires", "being harmed by garlic"], ["werewolves", "transforming during full moons"],
+        ["the five-second rule", "food safety"], ["swallowed gum", "staying in your stomach for years"],
+        ["carrots", "improving night vision"], ["cracking knuckles", "causing arthritis"],
+        ["shaving", "making hair grow back thicker"], ["reading in the dark", "ruining your eyesight"],
+        ["waiting an hour after eating", "before swimming"], ["using only 10% of our brains", "being true"],
+        ["the full moon", "making people act crazy"], ["yawning", "being contagious"],
+        ["hair and fingernails", "growing after death"], ["different sides of the tongue", "tasting different flavors"],
+        ["deja vu", "being a glitch in the Matrix"], ["the Great Pyramid", "being built by aliens"],
+        ["Stonehenge", "being built by Druids"], ["the Easter Island heads", "having buried bodies"],
+        ["the Hope Diamond", "being cursed"], ["the number 13", "being unlucky"],
+        ["black cats", "bringing bad luck"], ["breaking mirrors", "causing 7 years bad luck"],
+        ["walking under ladders", "being unlucky"], ["Friday the 13th", "being unlucky"],
+        ["the Mummy's curse", "being real"], ["the Philadelphia Experiment", "making a ship invisible"],
+        ["the Roswell incident", "UFO crash"], ["crop circles", "being made by aliens"],
+        ["chewing gum", "staying in your stomach for 7 years"], ["swallowed watermelon seeds", "growing in your stomach"],
+        ["toads", "causing warts"], ["eating before swimming", "causing cramps"],
+        ["waiting 24 hours", "before reporting missing persons"], ["lightning", "never striking the same place twice"],
+        ["the North Star", "being the brightest star"], ["meteors", "being hot when they land"],
+        ["the dark side of the moon", "being always dark"], ["astronauts", "seeing the Great Wall from space"],
+        ["the Sun", "being yellow"], ["seasons", "being caused by Earth's distance from the Sun"],
+        ["the Great Red Spot on Jupiter", "being a solid object"], ["black holes", "sucking up everything in the universe"],
+        ["shooting stars", "actually being stars"], ["the Martian canals", "being built by intelligent beings"],
+        ["the Moon", "being made of cheese"], ["Saturn", "being the only planet with rings"],
+        ["Uranus", " rotating on its side"], ["Neptune", "being the windiest planet"],
+        ["Pluto", "being a planet"], ["the Big Bang", "being an explosion"],
+        ["the universe", "having an edge"], ["time travel", "being possible"],
+        ["parallel universes", "existing"], ["the multiverse", "being real"]
+      ],
+      images: [
+        "https://cdn.pixabay.com/photo/2017/04/05/08/24/good-2204244_1280.png",
+        "https://cdn.pixabay.com/photo/2023/09/22/17/34/ai-generated-8269548_1280.png",
+        "https://cdn.pixabay.com/photo/2023/06/23/19/06/unicorn-8084034_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/06/21/11/12/ai-generated-8844180_1280.jpg",
+        "https://cdn.pixabay.com/photo/2016/11/01/13/20/fairy-tale-1788212_1280.jpg",
+        "https://cdn.pixabay.com/photo/2020/10/17/12/48/rabbit-5661931_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/08/11/13/14/fairy-8961388_1280.jpg",
+        "https://cdn.pixabay.com/photo/2024/02/22/09/10/woman-8589498_1280.png",
+        "https://cdn.pixabay.com/photo/2022/09/22/06/04/dolphin-7471712_1280.jpg",
+        "https://cdn.pixabay.com/photo/2022/09/22/06/04/night-sky-7471714_1280.jpg"
+      ]
+    };
+
+    // Function to generate a large number of myths
+    function generateMyths(count) {
+      const myths = [];
+      
+      for (let i = 0; i < count; i++) {
+        const template = mythDatabase.mythTemplates[Math.floor(Math.random() * mythDatabase.mythTemplates.length)];
+        const subject = mythDatabase.subjects[Math.floor(Math.random() * mythDatabase.subjects.length)];
+        const category = mythDatabase.categories[Math.floor(Math.random() * mythDatabase.categories.length)];
+        const verdict = mythDatabase.verdicts[Math.floor(Math.random() * mythDatabase.verdicts.length)];
+        
+        const title = template.title.replace("{0}", subject[0]).replace("{1}", subject[1]);
+        const claim = template.claim.replace("{0}", subject[0]).replace("{1}", subject[1]);
+        
+        const slug = title.toLowerCase()
+          .replace(/[^\w ]+/g, '')
+          .replace(/ +/g, '-') + '-' + i;
+        
+        // Create a simple investigation text based on the verdict
+        let investigation = "";
+        if (verdict === "BUSTED") {
+          investigation = `Our team of investigators looked into the claim that ${subject[0]} ${subject[1]}. After thorough research and experiments, we found this myth to be completely false! The truth is actually much more interesting than the myth.`;
+        } else if (verdict === "CONFIRMED") {
+          investigation = `Our research team conducted experiments to test whether ${subject[0]} really does ${subject[1]}. To our surprise, the evidence supports this claim! It turns out this "myth" is actually based on scientific fact.`;
+        } else {
+          investigation = `We investigated the connection between ${subject[0]} and ${subject[1]}. The results were intriguing - while not entirely true, there might be some circumstances where this could happen. More research is needed to say for sure!`;
+        }
+        
+        // Create a simple story
+        const story = `Our adventure team set out to discover the truth about ${subject[0]} and ${subject[1]}. Along the way, we met fascinating characters, conducted fun experiments, and learned that sometimes the truth is even more amazing than the myth!`;
+        
+        myths.push({
+          slug: slug,
+          title: title,
+          mythClaim: claim,
+          verdict: verdict,
+          category: category,
+          featuredImage: mythDatabase.images[Math.floor(Math.random() * mythDatabase.images.length)],
+          investigation: investigation,
+          story: story,
+          date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          views: Math.floor(Math.random() * 20000) + 1000
+        });
+      }
+      
+      return myths;
+    }
+
+    // Generate 120 myths
+    const myths = generateMyths(120);
+
+    const verdictClass = {
+      BUSTED: "verdict-busted",
+      CONFIRMED: "verdict-confirmed",
+      PLAUSIBLE: "verdict-plausible"
+    };
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      renderFeaturedMyths();
+      setupNavigation();
+      setupSearch();
+    });
+
+    function setupNavigation() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Remove active class from all links and sections
+          navLinks.forEach(l => l.classList.remove('active'));
+          document.querySelectorAll('.main-content').forEach(s => s.classList.remove('active'));
+          
+          // Add active class to clicked link
+          this.classList.add('active');
+          
+          // Show the corresponding section
+          const target = this.getAttribute('data-target');
+          document.getElementById(target).classList.add('active');
+          
+          // If browsing, render the browse content
+          if (target === 'browse') {
+            renderBrowseMyths();
+          }
+        });
+      });
+    }
+
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      
+      const performSearch = function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm.length < 2) return;
+        
+        const filteredMyths = myths.filter(myth => 
+          myth.title.toLowerCase().includes(searchTerm) || 
+          myth.mythClaim.toLowerCase().includes(searchTerm) ||
+          myth.category.toLowerCase().includes(searchTerm)
+        );
+        
+        // Show browse section with results
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.main-content').forEach(s => s.classList.remove('active'));
+        document.querySelector('.nav-link[data-target="browse"]').classList.add('active');
+        document.getElementById('browse').classList.add('active');
+        
+        // Render results
+        renderMythList(filteredMyths, 'browseMythList');
+      };
+      
+      searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          performSearch();
+        }
+      });
+      
+      searchButton.addEventListener('click', performSearch);
+    }
+
+    function renderFeaturedMyths() {
+      // Show 6 random myths as featured
+      const featuredMyths = [...myths]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 6);
+      
+      renderMythList(featuredMyths, 'featuredMythList');
+    }
+    
+    function renderBrowseMyths() {
+      // Show all myths for browsing
+      renderMythList(myths, 'browseMythList');
+    }
+
+    function renderMythList(mythsToRender, listId) {
+      const mythList = document.getElementById(listId);
+      mythList.innerHTML = '';
+      
+      if (mythsToRender.length === 0) {
+        mythList.innerHTML = '<p class="no-results">No myths found! Try a different search.</p>';
+        return;
+      }
+      
+      mythsToRender.forEach(myth => {
+        mythList.appendChild(createMythCard(myth));
+      });
+    }
+
+    function createMythCard(myth) {
+      const card = document.createElement('article');
+      card.className = 'myth-card';
+
+      const img = document.createElement('img');
+      img.src = myth.featuredImage;
+      img.alt = myth.title;
+
+      const content = document.createElement('div');
+      content.className = 'myth-card-content';
+
+      const verdict = document.createElement('span');
+      verdict.className = `verdict-pill ${verdictClass[myth.verdict] || ''}`;
+      verdict.textContent = myth.verdict;
+
+      const title = document.createElement('h2');
+      title.textContent = myth.title;
+
+      const excerpt = document.createElement('p');
+      excerpt.textContent = myth.mythClaim;
+
+      const meta = document.createElement('div');
+      meta.className = 'external-meta';
+      meta.innerHTML = `
+        <span>${myth.category.toUpperCase()}</span>
+        <span>${myth.date}</span>
+        <span>${myth.views.toLocaleString()} views</span>
+      `;
+
+      const link = document.createElement('a');
+      link.href = "#";
+      link.className = "read-more";
+      link.textContent = "Read Adventure Story";
+      link.onclick = function(e) {
+        e.preventDefault();
+        showInvestigation(myth);
+      };
+
+      content.appendChild(verdict);
+      content.appendChild(title);
+      content.appendChild(excerpt);
+      content.appendChild(meta);
+      content.appendChild(link);
+
+      card.appendChild(img);
+      card.appendChild(content);
+
+      return card;
+    }
+
+    function showInvestigation(myth) {
+      const mythDetail = document.getElementById('myth-detail');
+      
+      mythDetail.innerHTML = `
+        <a href="#" class="back-button" id="backBtn"><i class="fas fa-arrow-left"></i> Back to myths</a>
+        <div class="myth-detail">
+          <img src="${myth.featuredImage}" alt="${myth.title}">
+          <span class="verdict-pill ${verdictClass[myth.verdict] || ''}">${myth.verdict}</span>
+          <h2>${myth.title}</h2>
+          <p><strong>Myth Claim:</strong> ${myth.mythClaim}</p>
+          <div class="external-meta">
+            <span>Category: ${myth.category.toUpperCase()}</span>
+            <span>Date: ${myth.date}</span>
+            <span>Views: ${myth.views.toLocaleString()}</span>
+          </div>
+          <div class="investigation-content">
+            <h3>Our Adventure Investigation</h3>
+            <p>${myth.investigation}</p>
+            <h3>Story Time: The Truth Behind the Myth</h3>
+            <p>${myth.story}</p>
+          </div>
+        </div>
+      `;
+      
+      // Hide all sections and show the detail view
+      document.querySelectorAll('.main-content').forEach(s => s.classList.remove('active'));
+      mythDetail.classList.add('active');
+      
+      // Set up back button
+      document.getElementById('backBtn').onclick = function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.main-content').forEach(s => s.classList.remove('active'));
+        document.getElementById('home').classList.add('active');
+        document.querySelector('.nav-link[data-target="home"]').classList.add('active');
+      };
+    }
+  </script>
+</body>
+</html>
